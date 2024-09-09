@@ -1,0 +1,20 @@
+services:
+  openfortivpn:
+    build: openfortivpn
+    container_name: openfortivpn
+    restart: unless-stopped
+    ports:
+      - 1080:1080
+    volumes:
+      - ./openfortivpn/config:/etc/openfortivpn/config:ro
+    privileged: true
+  
+  socks:
+    build: socks
+    container_name: socks
+    restart: unless-stopped
+    environment:
+      - SSH_HOST=${SSH_HOST:?}
+      - SSH_USER=${SSH_USER:?}
+      - SSH_PASSWORD=${SSH_PASSWORD:?}
+    network_mode: service:openfortivpn
