@@ -12,7 +12,7 @@ while true; do
         -o ConnectTimeout=10 \
         -o ServerAliveInterval=10 \
         -o ServerAliveCountMax=3 \
-        -o TCPKeepAlive=no \  # Disable TCP-level keepalive
+        -o TCPKeepAlive=no \
         -D 0.0.0.0:1080 -q -C -N "$SSH_USER@$SSH_HOST"
     
     # If ssh fails, wait and retry
