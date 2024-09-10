@@ -1,4 +1,4 @@
-FROM debian:12.7
+FROM debian:12.7-slim
 
 # Install required packages
 RUN apt-get update && apt-get install -y \
