@@ -6,6 +6,6 @@ RUN apt update && apt install -y \
 
 WORKDIR /app
 
-COPY ./entry.sh ./
+COPY ./start.sh ./
 
-ENTRYPOINT [ "./entry.sh" ]
+CMD [ "./start.sh" ]

@@ -13,6 +13,9 @@ services:
     build: socks
     container_name: socks
     restart: unless-stopped
+    depends_on:
+      openfortivpn:
+        condition: service_healthy
     environment:
       - SSH_HOST=${SSH_HOST:?}
       - SSH_USER=${SSH_USER:?}
