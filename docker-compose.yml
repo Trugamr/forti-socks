@@ -9,15 +9,24 @@ services:
       - ./openfortivpn/config:/etc/openfortivpn/config:ro
     privileged: true
   
-  socks:
-    build: socks
-    container_name: socks
+  socks-tunnel:
+    image: ghcr.io/httptoolkit/docker-socks-tunnel:v1.2.0
+    container_name: socks-tunnel
     restart: unless-stopped
     depends_on:
       openfortivpn:
         condition: service_healthy
-    environment:
-      - SSH_HOST=${SSH_HOST:?}
-      - SSH_USER=${SSH_USER:?}
-      - SSH_PASSWORD=${SSH_PASSWORD:?}
     network_mode: service:openfortivpn
+
+  # socks:
+  #   build: socks
+  #   container_name: socks
+  #   restart: unless-stopped
+  #   depends_on:
+  #     openfortivpn:
+  #       condition: service_healthy
+  #   environment:
+  #     - SSH_HOST=${SSH_HOST:?}
+  #     - SSH_USER=${SSH_USER:?}
+  #     - SSH_PASSWORD=${SSH_PASSWORD:?}
+  #   network_mode: service:openfortivpn
